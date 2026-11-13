@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A tu puerta | Entregas, transporte ejecutivo y servicios a domicilio</title>
+  <meta name="description" content="A tu puerta: soluciones integrales de entregas, transporte ejecutivo de personas y servicios a domicilio en El Salvador." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --carbon: #17151C;
+      --purple: #54218A;
+      --lilac: #A855F7;
+      --lavender: #EDE4F7;
+      --white: #FFFFFF;
+      --ink: #211D2B;
+      --muted: #6F6880;
+      --line: rgba(23, 21, 28, 0.12);
+      --shadow: 0 24px 80px rgba(84, 33, 138, 0.16);
+      --radius: 28px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(168, 85, 247, 0.12), transparent 32rem),
+        radial-gradient(circle at bottom right, rgba(84, 33, 138, 0.10), transparent 34rem);
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      transition: transform 0.45s var(--ease), background 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav.scrolled {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-color: rgba(23, 21, 28, 0.08);
+      box-shadow: 0 12px 40px rgba(23, 21, 28, 0.06);
+    }
+
+    .nav-inner {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: "Sora", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      transition: transform 0.45s var(--ease);
+    }
+
+    .brand:hover img {
+      transform: rotate(-6deg) scale(1.06);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.3s var(--ease);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--purple), var(--lilac));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.45s var(--ease);
+    }
+
+    .nav-links a:hover {
+      color: var(--purple);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .whatsapp-link {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      box-shadow: 0 14px 30px rgba(37, 211, 102, 0.28);
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+    }
+
+    .whatsapp-link:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 20px 40px rgba(37, 211, 102, 0.34);
+    }
+
+    .whatsapp-link svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 48px;
+      height: 48px;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      position: absolute;
+      left: 13px;
+      width: 22px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--carbon);
+      transition: transform 0.35s var(--ease), opacity 0.25s var(--ease), top 0.35s var(--ease);
+    }
+
+    .menu-toggle span:nth-child(1) { top: 16px; }
+    .menu-toggle span:nth-child(2) { top: 23px; }
+    .menu-toggle span:nth-child(3) { top: 30px; }
+
+    .nav.open .menu-toggle span:nth-child(1) {
+      top: 23px;
+      transform: rotate(45deg);
+    }
+
+    .nav.open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav.open .menu-toggle span:nth-child(3) {
+      top: 23px;
+      transform: rotate(-45deg);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 15;
+      display: grid;
+      place-items: center;
+      padding: 110px 24px 48px;
+      background: linear-gradient(160deg, rgba(23, 21, 28, 0.97), rgba(84, 33, 138, 0.94));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s var(--ease);
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu nav {
+      display: grid;
+      justify-items: center;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .mobile-menu a {
+      color: var(--white);
+      font-family: "Sora", sans-serif;
+      font-size: clamp(30px, 9vw, 46px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.3s var(--ease);
+    }
+
+    .mobile-menu.open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-menu a:nth-child(1) { transition-delay: 0.06s; }
+    .mobile-menu a:nth-child(2) { transition-delay: 0.12s; }
+    .mobile-menu a:nth-child(3) { transition-delay: 0.18s; }
+    .mobile-menu a:nth-child(4) { transition-delay: 0.24s; }
+    .mobile-menu a:nth-child(5) { transition-delay: 0.30s; }
+
+    .mobile-menu a:hover {
+      color: var(--lavender);
+    }
+
+    .mobile-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      color: var(--carbon);
+      background: var(--lavender);
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+      transition: transform 0.35s var(--ease), background 0.35s var(--ease);
+    }
+
+    .mobile-cta:hover {
+      transform: translateY(-3px);
+      background: var(--white);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+    }
+
+    .button-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--purple), var(--lilac));
+      box-shadow: 0 18px 42px rgba(84, 33, 138, 0.28);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 54px rgba(84, 33, 138, 0.34);
+    }
+
+    .button-ghost {
+      color: var(--purple);
+      border: 1px solid rgba(84, 33, 138, 0.22);
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .button-ghost:hover {
+      transform: translateY(-3px);
+      border-color: rgba(84, 33, 138, 0.42);
+      background: var(--lavender);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: 150px 0 96px;
+      color: var(--ink);
+      background: linear-gradient(180deg, rgba(237, 228, 247, 0.42), rgba(255, 255, 255, 0));
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -38% auto;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.16), transparent 68%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 56px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid rgba(84, 33, 138, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--purple);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lilac);
+      box-shadow: 0 0 0 6px rgba(168, 85, 247, 0.18);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+    }
+
+    .hero h1 {
+      margin-top: 24px;
+      font-size: clamp(44px, 7vw, 86px);
+      font-weight: 800;
+      max-width: 760px;
+    }
+
+    .hero h1 span {
+      color: var(--purple);
+    }
+
+    .hero p {
+      margin-top: 24px;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 28px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(84, 33, 138, 0.12);
+      box-shadow: 0 24px 80px rgba(84, 33, 138, 0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.65), transparent 42%, rgba(237,228,247,0.55));
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .hero-card img {
+      position: relative;
+      width: min(320px, 100%);
+      margin: 0 auto;
+      filter: drop-shadow(0 24px 40px rgba(84, 33, 138, 0.22));
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .hero-card .card-label {
+      position: relative;
+      margin-top: 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    .section {
+      padding: 112px 0;
+      position: relative;
+    }
+
+    .section.alt {
+      background: linear-gradient(180deg, rgba(237, 228, 247, 0.42), rgba(255, 255, 255, 0));
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 48px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--purple);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--purple), var(--lilac));
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 800;
+    }
+
+    .section-head p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      position: relative;
+      padding: 34px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 60px rgba(23, 21, 28, 0.06);
+      overflow: hidden;
+      transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), border-color 0.5s var(--ease);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -55% auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.14), transparent 68%);
+      opacity: 0;
+      transition: opacity 0.5s var(--ease);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(84, 33, 138, 0.18);
+      box-shadow: 0 28px 80px rgba(84, 33, 138, 0.14);
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .card-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--purple), var(--lilac));
+      box-shadow: 0 16px 34px rgba(84, 33, 138, 0.24);
+      margin-bottom: 24px;
+      transition: transform 0.5s var(--ease);
+    }
+
+    .card:hover .card-icon {
+      transform: rotate(-8deg) scale(1.06);
+    }
+
+    .card h3 {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 16px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .contact-card {
+      position: relative;
+      padding: 40px;
+      border-radius: 36px;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 82% 12%, rgba(168, 85, 247, 0.34), transparent 24rem),
+        linear-gradient(135deg, #17151C 0%, #2A1745 52%, #54218A 100%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -18% -48% auto;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.30), transparent 68%);
+      pointer-events: none;
+    }
+
+    .contact-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-card h3 {
+      font-size: clamp(30px, 4vw, 44px);
+      margin-bottom: 14px;
+    }
+
+    .contact-card p {
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 560px;
+    }
+
+    .whatsapp-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 30px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      color: var(--carbon);
+      background: #25D366;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 18px 44px rgba(37, 211, 102, 0.30);
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s var(--ease);
+    }
+
+    .whatsapp-cta:hover {
+      transform: translateY(-3px);
+      background: #2BE07D;
+      box-shadow: 0 24px 56px rgba(37, 211, 102, 0.38);
+    }
+
+    .whatsapp-cta svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .contact-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 24px;
+      border-radius: 26px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 60px rgba(23, 21, 28, 0.06);
+      transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), box-shadow 0.45s var(--ease);
+    }
+
+    .contact-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(84, 33, 138, 0.18);
+      box-shadow: 0 26px 76px rgba(84, 33, 138, 0.14);
+    }
+
+    .contact-item-icon {
+      width: 54px;
+      height: 54px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--purple), var(--lilac));
+    }
+
+    .contact-item-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+    }
+
+    .contact-item strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .contact-item span {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .footer {
+      padding: 42px 0;
+      color: var(--white);
+      background: var(--carbon);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer .brand {
+      color: var(--white);
+    }
+
+    .footer p {
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .cards,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 132px;
+      }
+
+      .hero-card {
+        max-width: 520px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .section {
+        padding: 88px 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .nav-inner {
+        min-height: 74px;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero-actions .button,
+      .button {
+        width: 100%;
+      }
+
+      .contact-card {
+        padding: 30px 24px;
+      }
+
+      .contact-item {
+        padding: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#inicio" aria-label="A tu puerta">
+        <img src="logo.png" alt="Logo A tu puerta" />
+        <span>A tu puerta</span>
+      </a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#mision">Misión</a>
+        <a href="#vision">Visión</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="whatsapp-link" href="https://wa.me/50377202044" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <nav aria-label="Menú móvil">
+      <a href="#inicio">Inicio</a>
+      <a href="#mision">Misión</a>
+      <a href="#vision">Visión</a>
+      <a href="#contacto">Contacto</a>
+      <a class="mobile-cta" href="https://wa.me/50377202044" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Entregas · Transporte ejecutivo · Servicios a domicilio</span>
+          <h1>Todo lo que necesitas, <span>hasta tu puerta</span>.</h1>
+          <p>A tu puerta conecta a las personas con soluciones integrales de entregas, transporte y servicios a domicilio, con compromiso, responsabilidad y atención personalizada.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#mision">Descubre nuestra misión</a>
+            <a class="button button-ghost" href="https://wa.me/50377202044" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+          </div>
+        </div>
+        <div class="hero-card reveal">
+          <img src="logo.png" alt="Logo de A tu puerta" />
+          <div class="card-label">Soluciones con confianza y cercanía</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mision">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">Misión</div>
+          <h2>Facilitar la vida de las personas</h2>
+          <p>A través de soluciones integrales de entregas, transporte y servicios a domicilio, conectamos a nuestros clientes con lo que necesitan de manera segura, rápida y confiable.</p>
+        </div>
+        <div class="cards">
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+            </div>
+            <h3>Entregas</h3>
+            <p>Llevamos lo que necesitas hasta tu puerta con una experiencia segura, rápida y confiable.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17l1.5-5h9L18 17"/><circle cx="8" cy="19" r="1.5"/><circle cx="16" cy="19" r="1.5"/><path d="M4 12h16"/></svg>
+            </div>
+            <h3>Transporte ejecutivo</h3>
+            <p>Traslado de personas con servicio ejecutivo, puntual y personalizado para que llegues a tu destino con comodidad y confianza.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+            <h3>Servicios a domicilio</h3>
+            <p>Brindamos soluciones prácticas y cercanas para resolver tus necesidades sin complicaciones.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <h3>Compromiso y confianza</h3>
+            <p>Trabajamos con responsabilidad y atención personalizada para superar expectativas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="vision">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">Visión</div>
+          <h2>Ser una empresa líder y referente</h2>
+          <p>En soluciones de entregas, transporte y servicios a domicilio en El Salvador, reconocida por confianza, innovación, eficiencia y excelencia en el servicio.</p>
+        </div>
+        <div class="cards">
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M6 20V10"/><path d="M12 20V4"/><path d="M18 20v-7"/></svg>
+            </div>
+            <h3>Cobertura y diversificación</h3>
+            <p>Aspiramos a expandir nuestra cobertura y diversificar nuestras soluciones para llegar a más personas y empresas.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+            </div>
+            <h3>Aliado preferido</h3>
+            <p>Queremos convertirnos en el aliado preferido de personas y empresas para hacer llegar todo lo que necesitan, hasta su puerta.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker">Contacto</div>
+          <h2>Hablemos de tu próximo envío</h2>
+          <p>Estamos listos para ayudarte con entregas, transporte y servicios a domicilio. Escríbenos por WhatsApp y te atenderemos con la mejor experiencia.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>WhatsApp directo</h3>
+            <p>Comunícate con nosotros de forma rápida y sencilla. Ideal para coordinar entregas, consultas y servicios a domicilio.</p>
+            <a class="whatsapp-cta" href="https://wa.me/50377202044" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Escribir por WhatsApp
+            </a>
+          </div>
+          <div class="contact-side">
+            <div class="contact-item reveal">
+              <div class="contact-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div>
+                <strong>+503 7720 2044</strong>
+                <span>Atención por WhatsApp</span>
+              </div>
+            </div>
+            <div class="contact-item reveal">
+              <div class="contact-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+              </div>
+              <div>
+                <strong>Entregas y transporte ejecutivo</strong>
+                <span>Traslados de personas y soluciones a domicilio en El Salvador</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#inicio">
+        <img src="logo.png" alt="Logo A tu puerta" />
+        <span>A tu puerta</span>
+      </a>
+      <p>Entregas, transporte ejecutivo y servicios a domicilio con confianza y cercanía.</p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 24);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const setMenu = (open) => {
+      nav.classList.toggle('open', open);
+      mobileMenu.classList.toggle('open', open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+
+    menuToggle.addEventListener('click', () => {
+      setMenu(!mobileMenu.classList.contains('open'));
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenu(false));
+    });
+
+    const revealItems = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    revealItems.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
